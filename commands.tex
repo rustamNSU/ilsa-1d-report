@@ -1,0 +1,48 @@
+
+\textheight24cm
+\textwidth16cm
+\topmargin-5mm
+\oddsidemargin0cm
+\evensidemargin0cm
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[breaklinks]{hyperref}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{amsmath}
+
+\newcommand{\set}[2]{\{ \, #1 \mid #2 \, \}}
+
+\newtheorem{prototheorem}{Теорема}
+\newenvironment{theorem}
+	{\colorlet{shadecolor}{red!15}\begin{shaded}\vspace*{-2mm}\begin{prototheorem}}
+	{\end{prototheorem}\vspace*{-2mm}\end{shaded}}
+
+\newtheorem{protolemma}{Лемма}
+\newenvironment{lemma}
+	{\colorlet{shadecolor}{pink!20}\begin{shaded}\vspace*{-2mm}\begin{protolemma}}
+	{\end{protolemma}\vspace*{-2mm}\end{shaded}}
+
+\newtheorem{protocorollary}{Следствие}
+\newenvironment{corollary}
+	{\colorlet{shadecolor}{red!15}\begin{shaded}\vspace*{-2mm}\begin{protocorollary}}
+	{\end{protocorollary}\vspace*{-2mm}\end{shaded}}
+
+\newtheorem{protoproposition}{Утверждение}
+\newenvironment{proposition}
+	{\colorlet{shadecolor}{blue!15}\begin{shaded}\vspace*{-2mm}\begin{protoproposition}}
+	{\end{protoproposition}\vspace*{-2mm}\end{shaded}}
+
+\newtheorem{protoexample}{Пример}
+\newenvironment{example}
+	{\colorlet{shadecolor}{green!15}\begin{shaded}\vspace*{-2mm}\begin{protoexample}}
+	{\end{protoexample}\vspace*{-2mm}\end{shaded}}
+
+\newtheorem{protodefinition}{Определение}
+\newenvironment{definition}
+	{\colorlet{shadecolor}{blue!15}\begin{shaded}\vspace*{-2mm}\begin{protodefinition}}
+	{\end{protodefinition}\vspace*{-2mm}\end{shaded}}

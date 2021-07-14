@@ -1,0 +1,353 @@
+
+\documentclass[11pt,a4paper,russian,dvipsnames ]{article}
+
+\input{commands}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{bm}
+
+\begin{document}
+
+\title{Математическая модель распространения \\ магматических даек}
+%\author{}
+\date{\vspace{-9ex}}
+\maketitle
+
+\section{Постановка задачи}
+Построенная модель основывается на модели распространения трещины гидроразрыва пласта \underline{KGD}(Kristianovich, Geertsma, De Klerk).
+Симметричная вертикальная трещина длины 2L и высоты H распространяется в бесконечной упругой среде в условиях плоской деформации.
+По горизонтали трещина имеет фиксированный размер $H\gg L$. 
+Искомыми параметрами задачи являются раскрытие трещины $w(x,t)$, давление жидкости $p(x,t)$ и положение фронта трещины.
+\\
+
+\underline{Предположения}
+\begin{itemize}\setlength\itemsep{0.1em}
+	\item[(1)] трещина плоская;
+	\item[(2)] сечение плоскостью $Oyz$ представляет собой прямоугольник;
+	\item[(3)] раскрытие трещины не зависит от $y$;
+	\item[(4)] в пласте изначально действуют сжимающие напряжения $(\sigma_{\infty})$, направленные перпендикулярно плоскости трещины; $\sigma$ зависит от вертикальной координаты; % (вдоль оси $z$)
+	\item[(5)] порода является линейной упругой средой, характеризующейся $E$ и $\nu$;
+	\item[(6)] рост трещины определяется линейной механикой разрушения, $K_I = K_{Ic}$;
+	\item[(7)] порода предполагается однородной, т.е. значения $E$, $\nu$, $K_{Ic}$, $C_L$ постоянны и одинаковы во всех слоях;
+	\item[(8)] жидкость считается несжимаемой и ньютоновской с вязкостью $\mu$;
+	\item[(9)] утечки в пласт описываются формулой Картера;
+	\item[(10)] фронт жидкости совпадает с фронтом трещины (отсутствует \emph{fluid lag})
+\end{itemize}
+
+\section{Математическая модель}
+
+\subsection{Гидродинамика}
+Течение жидкости по трещине определяется законом сохранения массы %(уравнение теории смазки)
+\begin{equation}\label{eq:continity_equation}
+	\frac{\partial \omega}{\partial t} + \frac{\partial q}{\partial x} + \frac{C'}{\sqrt{t-t_{0}(x)}} = Q_{0}\delta(x_{0}), \quad C'=2C_{L}
+\end{equation}
+
+%\begin{equation}
+%	q=-\frac{\omega^{3}}{12\mu}\left(\frac{\partial p}{\partial x}+\rho_{m}g\right)
+%\end{equation}
+%уравнение количества движения
+
+Предполагая, что жидкость в трещине ньютоновская, и что течение ламинарное, поток жидкости внутри трещины может быть посчитан на основе закона Пуазейля с учётом плавучести:
+%\begin{equation}
+%	\frac{\partial p_{net}}{\partial x}=-\frac{12\mu}{\omega^{3}}Q
+%\end{equation}
+
+\begin{equation}\label{eq:lubrication_equation}
+	q=-\frac{\omega^{3}}{12\mu}\left(\frac{\partial p}{\partial x}-\Delta\rho g\right), 
+\end{equation}
+где $\Delta \rho=\rho_{s}-\rho_{m}$ --- плавучесть, а $p$ --- полное давление. \\
+
+Уравнение неразрывности~\eqref{eq:continity_equation} и уравнение для потока жидкости~\eqref{eq:lubrication_equation} могут быть объединены для получения уравнения Рейнольдса:
+
+\begin{equation}\label{eq:Reynolds_equation}
+	\frac{\partial \omega}{\partial t} = \frac{\partial }{\partial x}\left( \frac{\omega^{3}}{12\mu}\left(\frac{\partial p}{\partial x}-\Delta\rho g\right) \right) - \frac{C'}{\sqrt{t-t_{0}(x)}} + Q_{0}\delta(x_{0}).
+\end{equation}
+
+Поскольку предполагается ситуация, в которой фронт жидкости и фронт трещины совпадают, основное уравнение~\eqref{eq:Reynolds_equation} выполняется вдоль всей трещины.
+
+\subsection{Упругость}
+Уравнение упругости связывает давление жидкости, действующей на поверхность трещины, и раскрытие трещины. 
+Будем предполагать, что порода является однородной по физическим свойствам (модули упругости, коэффициент утечек).
+
+Реакция стенок трещины на давление жидкости в случае плоской деформации (формула Колосова--Мусхеншивили) выражается следующим образом: 
+
+\begin{equation}
+	\omega(t,x)=\frac{4}{\pi E'}\int \limits_{0}^{l(t)}p_{net}(t,\xi)B(t,\xi;L)d\xi,
+\end{equation}	
+
+\begin{equation}
+	 \text{где} \,	B(t,\xi;L)=ln\left|\frac{\sqrt{L^{2}-x^{2}}+\sqrt{L^{2}-\xi^{2}}}{\sqrt{L^{2}-x^{2}}+\sqrt{L^{2}+\xi^{2}}}\right|,
+\end{equation}
+где $L=l(y)$ --- положение кончика крыла трещины.
+
+Точное решение уравнений линейной теории упругости имеет следующий вид:
+\begin{equation}
+	p(x,t)-\sigma_{0}=-\frac{E}{(1-\nu^2)4\pi}\int \limits_{-l(t)}^{l(t)}\frac{\partial \omega}{\partial \xi}\frac{\partial \xi}{\xi-x}.
+\end{equation}
+
+Здесь $\sigma_{0}$ --- поле геологических напряжений (зависит только от вертикальной координаты), $p(x,t)$ --- давление жидкости и $w(x,t)$ --- раскрытие трещины.
+
+\subsection{Критерий распространения} 
+
+\begin{equation}
+	K_I=2\sqrt{\frac{L}{\pi}}\int \limits_{0}^{l(t)}\frac{p(t,\xi)}{\sqrt{L^{2}-\xi^{2}}} d\xi=K_{Ic}
+\end{equation}
+
+Раскрытие около кончика задаётся следующей асимптотикой (соответствующей трещиностойкости):
+%\begin{equation}
+%	\omega=\sqrt{\frac{32}{\pi}}\frac{K_{Ic}}{\frac{E}{(1-\nu^{2})}}(L-x)^{\frac{1}{2}}, \quad  x\rightarrow L
+%\end{equation}
+
+\begin{equation}
+	\omega\rightarrow\frac{K'}{E'}(L-x)^{\frac{1}{2}},\ x\rightarrow L,\ K'=\frac{8 K_{Ic}}{\sqrt{2\pi}}
+\end{equation}
+
+\subsection{Краевые условия}
+
+\begin{itemize}
+	\item На скважине задаётся постоянный расход жидкости в крыло трещины: $Q(0,t)=Q_{in}$
+	\item Краевое условие в кончике крыла имеет вид: $Q(L,t)=0$
+	\item Уравнение баланса жидкости:
+	\begin{equation*}
+		Q_{int} = \int \limits_{0}^{l(t)}\omega(x,t) dx + \int \limits_{0}^{t} \int \limits_{0}^{l(\tau)}Q_L(x,t) dx d\tau
+	\end{equation*}
+\end{itemize}
+
+\subsection{Начальные условия}
+
+\begin{equation}
+	L(0)=L_0, \quad \omega(x,0)=\omega_0 \, (0\leq x\leq L_0), \quad L_f(0)=L_0. 
+\end{equation}
+
+\section{Метод численного решения}
+
+Выделяются три типа элементов, покрывающих область трещины:
+
+\begin{itemize}\setlength\itemsep{0.1em}
+	\item \emph{внутренние} {\color{orange}(channel)} --- полностью находятся внутри трещины;
+	\item \emph{концевые} {\color{BrickRed}(tip)} --- частично содержат фронт трещины;
+	\item \emph{опорные} {\color{ForestGreen}(survey)} --- имеют хотя бы одну общую грань с концевыми элементами.	
+\end{itemize}
+
+Опорные элементы используются для определения положения фронта трещины.
+
+% \begin{figure}[h]
+% 	\includegraphics[width=1.0\textwidth]{KGD_ILSA}
+% 	\caption{Классификация элементов}
+% \end{figure}
+
+\begin{itemize}\setlength\itemsep{0.1em}
+	\item Раскрытие $w$ и давление $p$ --- кусочно-постоянная аппроксимация
+	\item Закон сохранения массы --- метод конечных объёмов
+	\item Уравнения упругости --- метод разрывных смещений
+	\item Разделение переменных на внутренние и концевые 
+\end{itemize}
+
+\subsection{Дискретизация уравнений}
+
+Для раскрытия трещины применяется кусочно-постоянная аппроксимация:
+
+\begin{equation}
+	w(x,t) = \sum_{m}^{} w_m(t) H_m(x), \quad H_m(x) = 
+														\left\{
+														\begin{array}{ll}
+															1, \quad \text{если} \, x \in \mathcal{A}_m,\\
+															0, \quad \text{если} \, x \notin \mathcal{A}_m\\		
+														\end{array}
+														\right.
+\end{equation}
+
+Проинтегрируем уравнение Рейнольдса~\eqref{eq:Reynolds_equation} по времени $[t - \Delta t, t]$ и по элементу $\mathcal{A}_m$:
+
+\begin{equation}
+	\int \limits_{t-\Delta t}^{t} \frac{\partial }{\partial x}\left( \frac{\omega^{3}}{12\mu}\left(\frac{\partial p}{\partial x}-\Delta\rho g\right) \right) dt' \approx 
+	\Delta t \frac{\partial }{\partial x}\left( \frac{\omega^{3}}{12\mu}\left(\frac{\partial p}{\partial x}-\Delta\rho g\right) \right);
+\end{equation}
+
+%\begin{equation}
+	\begin{flalign}
+	&\int \limits_{x-\Delta x}^{x} \Delta t \frac{\partial }{\partial x'}\left[ \frac{\omega^{3}}{\mu'}\left(\frac{\partial p}{\partial x'}-\Delta\rho g\right) \right] dx' = 
+	\left. \Delta t \left[ \frac{\omega^{3}}{\mu'}\left(\frac{\partial p}{\partial x}-\Delta\rho g\right) \right] \right\vert_{x - \Delta x}^x = & \nonumber\\
+	& = \Delta t \left[ \frac{\omega^{3}(x)}{\mu'}\left(\frac{\partial p(x)}{\partial x}-\Delta\rho g\right) -
+	\frac{\omega^{3}(x - \Delta x)}{\mu'}\left(\frac{\partial p(x - \Delta x)}{\partial x}-\Delta\rho g\right) \right] \approx & \\
+	& \approx \frac{\Delta t}{\mu'} \left[ \left( \frac{\omega_{m+1} + w_m}{2} \right)^3 \left(\frac{p_{m+1} - p_m}{\Delta x}-\Delta\rho g\right) -
+	\left( \frac{\omega_{m-1} + w_m}{2} \right)^3 \left(\frac{p_m - p_{m-1}}{\Delta x}-\Delta\rho g\right) \right] ; &\nonumber 
+	\end{flalign}
+%\end{equation}	
+
+\begin{equation}
+	\int \limits_{x-\Delta x}^{x} \int \limits_{t-\Delta t}^{t} \frac{\partial w}{\partial t'} dt' =
+	\int \limits_{x-\Delta x}^{x} [w(t) - w(t - \Delta t)] dx' = \Delta x [w(t) - w(t - \Delta t)];
+\end{equation}
+
+\begin{equation}
+	\int \limits_{x-\Delta x}^{x} \int \limits_{x-\Delta x}^{x} Q_0 \delta(x) dt' = \int \limits_{t-\Delta t}^{x} \Delta t Q_0 \delta(x_m) dx' = \left\{
+	\begin{array}{ll}
+		\Delta t \, \Delta x \, Q_0, &\quad \text{для элемента с индексом} \, m,\\
+		0, &\quad \text{для других элементов} \\		
+	\end{array}
+	\right.,
+\end{equation}
+где $\delta(x_m) = 1$ на всём элементе с индексом $m$ (предполагается, что источник находится в $m$-м элементе).
+
+\begin{equation}
+	\int \limits_{t-\Delta t}^{t} \frac{C'}{\sqrt{t'-t_{0}(x)}} dt' = 2C' \left( \sqrt{t - t_0(x)} - \sqrt{(t - \Delta t) - t_0(x)} \right)
+\end{equation} 
+
+1) если channel элемент:
+\begin{equation}
+	\int \limits_{x-\Delta x}^{x} 2C' \left( \sqrt{t - t_0(x')} - \sqrt{(t - \Delta t) - t_0(x')} \right) dx' \approx 
+	2C' \left( \sqrt{t - t_0(x_k)} - \sqrt{(t - \Delta t) - t_0(x_k)} \right) \cdot \Delta x,
+\end{equation}	
+где $x_k = (x + (x + \Delta x))/2$ --- центр элемента. \\
+
+2) если tip элемент (вычислим подынтегральное выражение не в центре элемента, а в центре масс заполненной жидкостью части):
+\begin{equation}
+	\int \limits_{x-\Delta x}^{x} 2C' \left( \sqrt{t - t_0(x')} - \sqrt{(t - \Delta t) - t_0(x')} \right) dx' \approx 
+	2C' \left( \sqrt{t - t_0(x_k)} - \sqrt{(t - \Delta t) - t_0(x_k)} \right) \cdot \frac{l}{\Delta x},
+\end{equation}	
+где $l$ --- расстояние от левой границы концевого элемента до фронта трещины, $x_k$ --- точка посередине между левой границей концевого элемента и фронтом трещины.
+
+Получим дискретизацию по методу конечных объёмов:
+\begin{equation}
+	w_m(t) - w_m(t - \Delta t) = \Delta t \cdot [\bm{A}(\bm{w}) \bm{p}]_m + \Delta t Q_0 \delta(x_m) + \mathcal{L}(t),
+\end{equation}
+где разностный оператор $[\bm{A}(\bm{w}) \bm{p}]_m$ определён следующим образом:
+
+\begin{equation}
+%	\begin{aligned}
+		[\bm{A}(\bm{w}) \bm{p}]_m =\frac{1}{\Delta x} \left[ \frac{w^3_{m+1/2}}{\mu'} \left( \frac{p_{m+1} - p_m}{\Delta x} - \Delta \rho g \right) - \frac{w^3_{m-1/2}}{\mu'} \left( \frac{p_{m} - p_{m-1}}{\Delta x} - \Delta \rho g \right) \right],
+%	\end{aligned}
+\end{equation}
+где раскрытие на гранях даётся в виде 
+$$ w_{m \pm 1/2} = \frac{w_{m \pm 1} + w_m}{2}. $$
+
+В краткой форме уравнение может быть выражено как
+
+\begin{equation}\label{eq:lubrication_equation_discretized}
+	\bm{w}(t) = \bm{w}(t - \Delta t) + \Delta t \cdot \bm{A}(\bm{w}) \bm{p} + \Delta t Q_0 \delta(x_m) + \mathcal{L}(t),
+\end{equation}
+где $\bm{A}(\bm{w})$ и $\bm{p}$ вычисляются в момент времени $t$ (интегрирование по времени производится с использованием \emph{backward Euler}).
+
+Все переменные можно разделить следующим образом:
+\begin{equation}
+	\bm{w} = [w^c, w^t], \quad \bm{p} = [p^c, p^t],
+\end{equation}
+где величины с индексом ``$c$'' соответствуют внутренним (channel) элементам, а величины с индексом ``$t$'' соответствуют концевым (tip) элементам. \\
+
+\noindent \underline{Что известно?} 
+\begin{itemize}\setlength\itemsep{0.1em}
+	\item[] $w^t$ --- определено с помощью условия распространения $w(s) = w_a(s), \, s \rightarrow 0, \\ w_a(x)$ --- асимптотическое решение на кончике, $s$ --- расстояние до фронта трещины, 
+	\item[] $p^t$ --- неизвестно, 
+	\item[] $p^c$ --- из уравнения упругости для внутренних элементов, 
+	\item[] $w^c$ --- неизвестно.	
+\end{itemize}
+
+Уравнение упругости для внутренних (channel) элементов может быть решено с помощью метода разрывных смещений:
+\begin{equation}\label{eq:pw_equation}
+	p^c_m(t) = \sigma^c_m + \sum_{k} C_{m,k} w_k(t),	
+\end{equation}
+где $p^c_m$ --- значения давления жидкости в центрах внутренних элементов, $\sigma^c_m$ --- соответствующие значения напряжения.
+
+Матрица упргости $\mathcal{C}$ (для однородно-упругой среды):
+\begin{equation}
+	\mathcal{C}_{m,k} = - \frac{E'}{4 \pi} \left. \left[ \frac{1}{(x_m - x)^2} \right] \right\vert^{x = x_k + \Delta x / 2}_{x = x_k - \Delta x / 2} = - \frac{E'}{4 \pi} \left( \frac{1}{(x_m - (x_k + \Delta x / 2))^2} - \frac{1}{(x_m - (x_k - \Delta x / 2))^2} \right)
+\end{equation}
+	
+Уравнение~\eqref{eq:pw_equation} в матричной форме можно записать как
+\begin{equation}
+	\bm{p}^c = \bm{\sigma} + \bm{C} \bm {w},
+\end{equation}	
+где $\bm{C}$ --- полностью заполненная матрица упругости. \\
+
+Уравнение $\bm{p} = \bm{C} \bm{w}$ расписывается как
+\begin{align}
+%	\begin{pmatrix}
+		\begin{bmatrix}
+			p^c \\           
+			p^t 		
+		\end{bmatrix}
+	& = 	
+		\begin{bmatrix}
+			C^{cc} \quad C^{ct} \\           			
+			C^{tc} \quad C^{tt}
+		\end{bmatrix} 
+		\begin{bmatrix}
+			w^c \\
+			w^t
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			C^{cc} w^c + C^{ct} w^t \\
+			C^{tc} w^c + C^{tt} w^t
+		\end{bmatrix}
+%	\end{pmatrix}
+\end{align}
+
+Тогда уравнение~\eqref{eq:lubrication_equation_discretized} может быть представлено в виде:
+
+\begin{align}
+	%	\begin{pmatrix}
+	\begin{bmatrix}
+		w^c \\           
+		w^t 		
+	\end{bmatrix}
+	& = 	
+	\begin{bmatrix}
+		w^c_0 \\           
+		w^t_0 		
+	\end{bmatrix} 
+	+
+	\Delta t \cdot
+	\begin{bmatrix}
+		A^{cc} \quad A^{ct} \\           			
+		A^{tc} \quad A^{tt}
+	\end{bmatrix} 
+	\begin{bmatrix}
+		p^c \\
+		p^t
+	\end{bmatrix}
+	+
+	\Delta t \cdot
+	\begin{bmatrix}
+		Q_0^c \delta(x_m) \\           
+		Q_0^t \delta(x_m) 		
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		w^c_0 + \Delta t (A^{cc} p^c + A^{ct} p^t) + \Delta t Q_0^c \delta(x_m) \\
+		w^t_0 + \Delta t (A^{tc} p^c + A^{tt} p^t) + \Delta t Q_0^t \delta(x_m)
+	\end{bmatrix}
+	%	\end{pmatrix}
+\end{align}
+
+Подставим $p^c = C^{cc} w^c + C^{ct} w^t$ в получившуюся систему:
+$$w^c = w^c_0 + \Delta t (A^{cc} C^{cc} w^c + A^{cc} C^{ct} w^t + A^{ct} p^t) + \Delta t Q_0^c \delta(x_m),$$
+$$w^t = w^t_0 + \Delta t (A^{tc} C^{cc} w^c + A^{tc} C^{ct} w^t + A^{tt} p^t) + \Delta t Q_0^t \delta(x_m);$$
+
+%$$(1 - \Delta t (A^{cc} C^{cc}) w^c - \Delta t A^{ct} p^t = w^c_0 + A^{cc} C^{ct} w^t + \Delta t Q_0^c \delta(x_m),$$
+%$$ -\Delta t A^{tc} C^{cc} w^c - \Delta t A^{tt} p^t = w^t_0 + \Delta t A^{tc} C^{ct} w^t + \Delta t Q_0^t \delta(x_m) - w^t.$$
+
+Полная система имеет вид:
+\begin{align}
+	%	\begin{pmatrix}
+	\begin{bmatrix}
+		I - \Delta t A^{cc} C^{cc} \quad - \Delta t A^{ct} \\           
+		-\Delta t A^{tc} C^{cc} \quad \, - \Delta t A^{tt} 		
+	\end{bmatrix}
+	\begin{bmatrix}
+		w^c \\           
+		p^t 		
+	\end{bmatrix} 
+	=
+	\begin{bmatrix}
+		w^c_0 + A^{cc} C^{ct} w^t + \Delta t Q_0^c \delta(x_m) \\
+		w^t_0 + \Delta t A^{tc} C^{ct} w^t + \Delta t Q_0^t \delta(x_m) - w^t
+	\end{bmatrix}
+	%	\end{pmatrix}
+\end{align}
+
+Остаётся определить $\bm{w}^t$, которое связано с динамикой фронта трещины. Если $\bm{w}^t$ известно, то уравнение~\eqref{eq:pw_equation} может быть решено относительно $\bm{w}^c$ и $\bm{p}^t$ с помощью итерационного метода.
+
+\end{document}
